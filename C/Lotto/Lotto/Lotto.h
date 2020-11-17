@@ -33,3 +33,5 @@ E [  ][  ][  ][  ][  ][  ][  ]
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+
+int mtm(int* arr);
