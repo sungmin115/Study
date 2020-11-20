@@ -1,8 +1,11 @@
 #include"Lotto.h"
 
+
+
+//3 && 5 대신 전처리기를 사용하여 ROW , COLUMN 을 이용해주세요.
 int mtm(int *arr) {
 	int i = 0, j = 0, temp = 0;
-
+	
 	for (i = 0; i < 3; i++)
 	{
 		for (j = 0; j < 5; j++)
@@ -18,6 +21,8 @@ int mtm(int *arr) {
 
 }
 
+
+// 배열 한줄씩 X 한장 씩 5줄.
 int show(int *arr) {
 	int i = 0;
 	for (i=0;i<6;i++)
@@ -80,6 +85,7 @@ int Write(int* arr) {
 	}
 }
 
+//한장에 대한 A줄, B줄....에대한 당첨 여부 부탁드려요. 당첨은 1등부터 5등까지요.
 void Check_num(int* arr) {
 	int an[6] = { 0 };
 	int i_check = 0;
@@ -107,7 +113,7 @@ void Check_num(int* arr) {
 	}
 }
 
-
+// 몇장은 추후 기능 개선으로 하시고 몇줄을 살지 정하시돼 이차원 배열로 부탁드립니다.
 void Howmany(int * row, int * page) {
 	int w_row = 0;
 	int w_page = 0;
