@@ -132,7 +132,7 @@ void Howmany(int * row) {
 	scanf_s("%d", &w_page);
 	*page = w_page;*/
 	*row = w_row;
-	return &w_row;
+	return &w_row; // retun 반환형 확인 요청. 
 }
 
 
