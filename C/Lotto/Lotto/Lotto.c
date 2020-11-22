@@ -20,11 +20,12 @@ int mtm(int *arr) {
 			}
 		}
 	}
+	//return 0;
 }
 
 
 // 배열 한줄씩 X 한장 씩 5줄.
-int show(int **arr) {
+void show(int (*arr)[6], int row, int col) {
 	int i = 0;
 	int j = 0;
 	for (j=0;j<5;j++) {
@@ -38,36 +39,35 @@ int show(int **arr) {
 }
 
 
-random(int* arr) {
-	int i = 0;
+void random(int arr[5][6]) {
+	int i = 0, j=0;
 	int count = 0;
 	int check = 0;
 
-	while (i < 6)    //로또 숫자 6개가 반복 되는 구간
-	{
-		arr[i] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
-		for (count = 0; count < i; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
+	for (j=0;j<5;j++) {
+		while (i < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
-			check = 0;    // 체크 숫자 초기화
-			if (arr[i] == arr[count])  //숫자가 같은지 체크
+			arr[i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
+			for (count = 0; count < i; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
-				check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
-				break;
+				check = 0;    // 체크 숫자 초기화
+				if (arr[i][j] == arr[count])  //숫자가 같은지 체크
+				{
+					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
+					break;
+				}
 			}
-		}
-		if (check == 0)
-		{
-			i++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
+			if (check == 0)
+			{
+				i++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
+			}
 		}
 	}
 }
 
-int Write(int** arr) {
-	int i = 0;
-	int j = 0;
-	int num = 0;
-	int count = 0;
-	int check = 0;
+void Write(int** arr) {
+	int i = 0, j=0;
+	int num = 0, count = 0, check = 0;
 
 	printf("중복되지 않는 숫자 6개를 입력 하시오 만약 중복된 숫자 입력시 다시 입력 하시오.\n");
 
@@ -132,11 +132,11 @@ void Howmany(int * row) {
 	scanf_s("%d", &w_page);
 	*page = w_page;*/
 	*row = w_row;
-	return &w_row; // retun 반환형 확인 요청. 
 }
 
 
 void run() {
+	int i = 0;
 	int ch = 0;
 	int row = 1, i_row = 0;
 	int page = 1,  i_page = 0;
@@ -155,13 +155,13 @@ void run() {
 			{
 				random(&lotto);
 				mtm(&lotto);
-				show(&lotto);
-				Check_num(&lotto);
+				show(lotto, row, 6);
+				//Check_num(&lotto);
 			}
 			else if (ch == 2) {
 				Write(&lotto);
 				mtm(&lotto);
-				show(&lotto);
+				show(lotto, row, 6);
 
 				Check_num(&lotto);
 			}
