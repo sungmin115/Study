@@ -25,11 +25,11 @@ int mtm(int *arr) {
 
 
 // 배열 한줄씩 X 한장 씩 5줄.
-void show(int (*arr)[6], int row, int col) {
+void show(int (*arr)[6], int col, int row) {
 	int i = 0;
 	int j = 0;
-	for (j=0;j<5;j++) {
-		for (i = 0; i < 6; i++)
+	for (j=0;j<row;j++) {
+		for (i = 0; i < col; i++)
 		{
 			printf("%d ", arr[j][i]);
 		}
@@ -44,8 +44,9 @@ void random(int arr[5][6]) {
 	int count = 0;
 	int check = 0;
 
-	for (j=0;j<5;j++) {
-		while (i < 6)    //로또 숫자 6개가 반복 되는 구간
+	for (i=0;i<5;i++) {
+		j = 0;
+		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
 			arr[i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
 			for (count = 0; count < i; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
@@ -59,27 +60,28 @@ void random(int arr[5][6]) {
 			}
 			if (check == 0)
 			{
-				i++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
+				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
 	}
 }
 
-void Write(int** arr) {
+void Write(int arr[5][6]) {
 	int i = 0, j=0;
 	int num = 0, count = 0, check = 0;
 
 	printf("중복되지 않는 숫자 6개를 입력 하시오 만약 중복된 숫자 입력시 다시 입력 하시오.\n");
 
-	for (j=0;j<5;j++) {
-		while (i < 6)    //로또 숫자 6개가 반복 되는 구간
+	for (i=0;i<5;i++) {
+		j = 0;
+		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
 			scanf_s("%d", &num);   // 숫자 입력 구간
-			arr[j][i] = num;    //작성한 숫자가 배열에 저장 되는 구간
+			arr[i][j] = num;    //작성한 숫자가 배열에 저장 되는 구간
 			for (count = 0; count < i; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (arr[j][i] == arr[count])  //숫자가 같은지 체크
+				if (arr[i][j] == arr[count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -87,7 +89,7 @@ void Write(int** arr) {
 			}
 			if (check == 0)
 			{
-				i++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
+				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
 	}
@@ -136,7 +138,6 @@ void Howmany(int * row) {
 
 
 void run() {
-	int i = 0;
 	int ch = 0;
 	int row = 1, i_row = 0;
 	int page = 1,  i_page = 0;
@@ -155,13 +156,13 @@ void run() {
 			{
 				random(&lotto);
 				mtm(&lotto);
-				show(lotto, row, 6);
+				show(lotto, 6,row);
 				//Check_num(&lotto);
 			}
 			else if (ch == 2) {
 				Write(&lotto);
 				mtm(&lotto);
-				show(lotto, row, 6);
+				show(lotto, 6, row);
 
 				Check_num(&lotto);
 			}
