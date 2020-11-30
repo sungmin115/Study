@@ -2,27 +2,24 @@
 #define ROW 3
 #define COLUMN 5
 
-
-
-//3 && 5 대신 전처리기를 사용하여 ROW , COLUMN 을 이용해주세요.
-int mtm(int *arr) {
-	int i = 0, j = 0, temp = 0;
-	
-	for (i = 0; i < ROW; i++)
-	{
-		for (j = 0; j < COLUMN; j++)
-		{
-			if (arr[j] > arr[j + 1])
-			{
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-		}
-	}
-	//return 0;
-}
-
+////3 && 5 대신 전처리기를 사용하여 ROW , COLUMN 을 이용해주세요.
+//int mtm(int* arr) {
+//	int i = 0, j = 0, temp = 0;
+//
+//	for (mtm_i = 0; mtm_i < ROW; mtm_i++)
+//	{
+//		for (mtm_j = 0; mtm_j < COLUMN; mtm_j++)
+//		{
+//			if (arr[mtm_j] > arr[mtm_j + 1])
+//			{
+//				temp = arr[mtm_j];
+//				arr[mtm_j] = arr[mtm_j + 1];
+//				arr[mtm_j + 1] = temp;
+//			}
+//		}
+//	}
+//	//return 0;
+//}
 
 // 배열 한줄씩 X 한장 씩 5줄.
 void show(int (*arr)[6], int col, int row) {
@@ -41,8 +38,8 @@ void show(int (*arr)[6], int col, int row) {
 
 void random(int arr[5][6]) {
 	int i = 0, j=0;
-	int count = 0;
-	int check = 0;
+	int mtm_i = 0, mtm_j = 0;
+	int count = 0, check = 0, temp = 0;
 
 	for (i=0;i<5;i++) {
 		j = 0;
@@ -61,6 +58,18 @@ void random(int arr[5][6]) {
 			if (check == 0)
 			{
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
+			}
+		}
+		for (mtm_i = 0; mtm_i < ROW; mtm_i++)
+		{
+			for (mtm_j = 0; mtm_j < COLUMN; mtm_j++)
+			{
+				if (arr[mtm_i][mtm_j] > arr[mtm_i][mtm_j + 1])
+				{
+					temp = arr[i][mtm_j];
+					arr[i][mtm_j] = arr[i][mtm_j + 1];
+					arr[i][mtm_j + 1] = temp;
+				}
 			}
 		}
 	}
@@ -139,7 +148,8 @@ void Howmany(int * row) {
 
 void run() {
 	int ch = 0;
-	int row = 1, i_row = 0;
+	int row = 1;
+	//int i_row = 0;
 	int page = 1,  i_page = 0;
 	int lotto[5][6]={0};
 	srand(time(NULL));
@@ -147,26 +157,22 @@ void run() {
 	Howmany(&row);
 
 	for (i_page = 0; i_page < page; i_page++) {
-		for (i_row=0;i_row<row;i_row++) {
-			printf("%d장 %d줄 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page+1, i_row+1);
+		//for (i_row=0;i_row<row;i_row++) {
+			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page+1);
 			printf("1. 자동  2. 수동 \n");
 			scanf_s("%d", &ch);
-
 			if (ch == 1)
 			{
 				random(&lotto);
-				mtm(&lotto);
-				show(lotto, 6,row);
+				show(lotto, 6, row);
 				//Check_num(&lotto);
 			}
 			else if (ch == 2) {
 				Write(&lotto);
-				mtm(&lotto);
 				show(lotto, 6, row);
-
-				Check_num(&lotto);
+				//Check_num(&lotto);
 			}
-		}
+		//}
 	}
 	return 0;
 }
