@@ -1,5 +1,4 @@
 #include"Lotto.h"
-#define ROW 3
 #define COLUMN 5
 
 ////3 && 5 대신 전처리기를 사용하여 ROW , COLUMN 을 이용해주세요.
@@ -36,20 +35,20 @@ void show(int (*arr)[6], int col, int row) {
 }
 
 
-void random(int arr[5][6]) {
+void random(int arr[5][6], int user_data) {
 	int i = 0, j=0;
 	int mtm_i = 0, mtm_j = 0;
 	int count = 0, check = 0, temp = 0;
 
-	for (i=0;i<5;i++) {
+	for (i=0;i<user_data;i++) {
 		j = 0;
 		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
 			arr[i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
-			for (count = 0; count < i; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
+			for (count = 0; count < j; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (arr[i][j] == arr[count])  //숫자가 같은지 체크
+				if (arr[i][j] == arr[i][count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -60,11 +59,11 @@ void random(int arr[5][6]) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		for (mtm_i = 0; mtm_i < ROW; mtm_i++)
+		for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
 		{
-			for (mtm_j = 0; mtm_j < COLUMN; mtm_j++)
+			for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
 			{
-				if (arr[mtm_i][mtm_j] > arr[mtm_i][mtm_j + 1])
+				if (arr[i][mtm_j] > arr[i][mtm_j + 1])
 				{
 					temp = arr[i][mtm_j];
 					arr[i][mtm_j] = arr[i][mtm_j + 1];
@@ -75,22 +74,23 @@ void random(int arr[5][6]) {
 	}
 }
 
-void Write(int arr[5][6]) {
+void Write(int arr[5][6], int user_data) {
 	int i = 0, j=0;
-	int num = 0, count = 0, check = 0;
+	int mtm_i = 0, mtm_j = 0;
+	int num = 0, count = 0, check = 0, temp = 0;
 
 	printf("중복되지 않는 숫자 6개를 입력 하시오 만약 중복된 숫자 입력시 다시 입력 하시오.\n");
 
-	for (i=0;i<5;i++) {
+	for (i=0;i< user_data;i++) {
 		j = 0;
 		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
 			scanf_s("%d", &num);   // 숫자 입력 구간
 			arr[i][j] = num;    //작성한 숫자가 배열에 저장 되는 구간
-			for (count = 0; count < i; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
+			for (count = 0; count < j; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (arr[i][j] == arr[count])  //숫자가 같은지 체크
+				if (arr[i][j] == arr[i][count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -101,26 +101,77 @@ void Write(int arr[5][6]) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
+		for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
+		{
+			for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
+			{
+				if (arr[i][mtm_j] > arr[i][mtm_j + 1])
+				{
+					temp = arr[i][mtm_j];
+					arr[i][mtm_j] = arr[i][mtm_j + 1];
+					arr[i][mtm_j + 1] = temp;
+				}
+			}
+		}
 	}
 }
 
 //한장에 대한 A줄, B줄....에대한 당첨 여부 부탁드려요. 당첨은 1등부터 5등까지요.
-void Check_num(int* arr) {
-	int an[6] = { 0 };
-	int i_check = 0;
+void Check_num(int(*arr)[6], int user_data) {
+	int an[5][6] = { 0 };
+	//int i_check = 0;
 	int count = 0;
+	int u_i = 0, u_j = 0,a_i=0, a_j =0;
 
-	random(&an);
+	random(&an, 1);
+	printf("정답: \n");
+	show(&an, 6, 1);   // 정답 확인용
 
-	//printf("정답: \n");
-	//show(&an);   // 정답 확인용
+	for (u_i=0;u_i<user_data;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
+		u_j = 0;
+		while (u_j < 6)    // 유저의 한 줄의 대한 반복
+		{
+			a_j = 0;
+			while (a_j<6) {  //정답에 대한 줄의 반복
+				if (arr[u_i][u_j] == an[0][a_j]) {  //정답과 유저의 값이 같다면 count의 증가
+					count++;
+					u_j++;
+					break;
+				}
+				else {    //정답이 맞지 않다면 계속 체크
+					a_j++;
+				}
+			}
+			u_j++;
+		}
+		printf("%d줄의 count수 : %d \n",user_data, count); //count가 제대로 나오는지 테스트
 
-	while (i_check < 6) {
+		switch (count) {
+		case 6:
+			printf("1등에 당첨 되셨습니다. \n \n");
+			break;
+		case 5:
+			printf("2등에 당첨 되셨습니다. \n \n");
+			break;
+		case 4:
+			printf("3등에 당첨 되셨습니다. \n \n");
+			break;
+		case 3:
+			printf("4등에 당첨 되셨습니다. \n \n");
+			break;
+		case 2:
+			printf("5등에 당첨 되셨습니다. \n \n");
+			break;
+		default:
+			printf("낙첨 되셨습니다. \n \n");
+		}
+	}
+	
+	/*while (i_check < 6) {
 		if (an[i_check] == arr[i_check])
 		{
 			count++;
 			i_check++;
-
 		}
 		else if (an[i_check] != arr[i_check]) {
 			i_check++;
@@ -129,7 +180,7 @@ void Check_num(int* arr) {
 		{
 			printf("당첨 되었습니다. \n");
 		}
-	}
+	}*/
 }
 
 // 몇장은 추후 기능 개선으로 하시고 몇줄을 살지 정하시돼 이차원 배열로 부탁드립니다.
@@ -163,14 +214,14 @@ void run() {
 			scanf_s("%d", &ch);
 			if (ch == 1)
 			{
-				random(&lotto);
+				random(&lotto, row);
 				show(lotto, 6, row);
-				//Check_num(&lotto);
+				Check_num(&lotto, row);
 			}
 			else if (ch == 2) {
-				Write(&lotto);
+				Write(&lotto, row);
 				show(lotto, 6, row);
-				//Check_num(&lotto);
+				Check_num(&lotto, row);
 			}
 		//}
 	}
