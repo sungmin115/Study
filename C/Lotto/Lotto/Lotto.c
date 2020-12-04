@@ -1,24 +1,23 @@
 #include"Lotto.h"
 #define COLUMN 5
 
-////3 && 5 대신 전처리기를 사용하여 ROW , COLUMN 을 이용해주세요.
-//int mtm(int* arr) {
-//	int i = 0, j = 0, temp = 0;
-//
-//	for (mtm_i = 0; mtm_i < ROW; mtm_i++)
-//	{
-//		for (mtm_j = 0; mtm_j < COLUMN; mtm_j++)
-//		{
-//			if (arr[mtm_j] > arr[mtm_j + 1])
-//			{
-//				temp = arr[mtm_j];
-//				arr[mtm_j] = arr[mtm_j + 1];
-//				arr[mtm_j + 1] = temp;
-//			}
-//		}
-//	}
-//	//return 0;
-//}
+int mtm(int arr[5][6]) {
+	int i = 0;
+	int mtm_i = 0, mtm_j = 0,temp = 0;
+
+	for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
+	{
+		for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
+		{
+			if (arr[i][mtm_j] > arr[i][mtm_j + 1])
+			{
+				temp = arr[mtm_j];
+				arr[i][mtm_j] = arr[i][mtm_j + 1];
+				arr[i][mtm_j + 1] = temp;
+			}
+		}
+	}
+}
 
 // 배열 한줄씩 X 한장 씩 5줄.
 void show(int (*arr)[6], int col, int row) {
@@ -59,7 +58,9 @@ void random(int arr[5][6], int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
+		mtm(&arr);
+		
+		/*for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
 		{
 			for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
 			{
@@ -70,7 +71,7 @@ void random(int arr[5][6], int user_data) {
 					arr[i][mtm_j + 1] = temp;
 				}
 			}
-		}
+		}*/
 	}
 }
 
@@ -168,21 +169,6 @@ void Check_num(int(*arr)[6], int user_data) {
 			printf("낙첨 되셨습니다. \n \n");
 		}
 	}
-	
-	/*while (i_check < 6) {
-		if (an[i_check] == arr[i_check])
-		{
-			count++;
-			i_check++;
-		}
-		else if (an[i_check] != arr[i_check]) {
-			i_check++;
-		}
-		if (count == 6)
-		{
-			printf("당첨 되었습니다. \n");
-		}
-	}*/
 }
 
 // 몇장은 추후 기능 개선으로 하시고 몇줄을 살지 정하시돼 이차원 배열로 부탁드립니다.
@@ -210,7 +196,6 @@ void run() {
 	Howmany(&row);
 
 	for (i_page = 0; i_page < page; i_page++) {
-		//for (i_row=0;i_row<row;i_row++) {
 			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page+1);
 			printf("1. 자동  2. 수동 \n");
 			scanf_s("%d", &ch);
@@ -225,7 +210,6 @@ void run() {
 				show(lotto, 6, row);
 				Check_num(&lotto, row);
 			}
-		//}
 	}
 	return 0;
 }
