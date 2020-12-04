@@ -1,7 +1,7 @@
 #include"Lotto.h"
 #define COLUMN 5
 
-int mtm(int arr[5][6]) {
+int mtm(int (*arr)[6]) {
 	int i = 0;
 	int mtm_i = 0, mtm_j = 0,temp = 0;
 
@@ -17,6 +17,7 @@ int mtm(int arr[5][6]) {
 			}
 		}
 	}
+	return arr;
 }
 
 // 배열 한줄씩 X 한장 씩 5줄.
@@ -58,7 +59,7 @@ void random(int arr[5][6], int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		mtm(&arr);
+		mtm(arr);
 		
 		/*for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
 		{
