@@ -1,20 +1,28 @@
 #include"Lotto.h"
 #define COLUMN 5
 
-int mtm(int (*arr)[6], int i) {
-	int mtm_i = 0, mtm_j = 0,temp = 0;
+int mtm(int (*arr)[6], int a_i) {
+	int i = 0;
+	int mtm_i = 0,temp = 0;
+	int switch_a[6] = { 0 };
 
+	for (i = 0; i < 6; i++) {
+		switch_a[i] = arr[a_i][i];
+	}
 	for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
 	{
-		for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
+		for (i = 0; i < COLUMN - mtm_i; i++)
 		{
-			if (arr[i][mtm_j] > arr[i][mtm_j + 1])
+			if (switch_a[i] > switch_a[i+1])
 			{
-				temp = arr[mtm_j];
-				arr[i][mtm_j] = arr[i][mtm_j + 1];
-				arr[i][mtm_j + 1] = temp;
+				temp = switch_a[i];
+				switch_a[i] = switch_a[i+1];
+				switch_a[i+1] = temp;
 			}
 		}
+	}
+	for (i = 0; i < 6; i++) {
+		arr[a_i][i] = switch_a[i];
 	}
 	return arr;
 }
