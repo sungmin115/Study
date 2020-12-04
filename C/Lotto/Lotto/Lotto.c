@@ -129,8 +129,10 @@ void Check_num(int(*arr)[6], int user_data) {
 
 	for (u_i=0;u_i<user_data;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
 		u_j = 0;
+		count = 0;
 		while (u_j < 6)    // 유저의 한 줄의 대한 반복
 		{
+			
 			a_j = 0;
 			while (a_j<6) {  //정답에 대한 줄의 반복
 				if (arr[u_i][u_j] == an[0][a_j]) {  //정답과 유저의 값이 같다면 count의 증가
@@ -143,9 +145,9 @@ void Check_num(int(*arr)[6], int user_data) {
 				}
 			}
 			u_j++;
-		}
-		printf("%d줄의 count수 : %d \n",user_data, count); //count가 제대로 나오는지 테스트
 
+		}
+		printf("%d줄의 당첨 갯수 : %d \n",u_i+1, count);
 		switch (count) {
 		case 6:
 			printf("1등에 당첨 되셨습니다. \n \n");
