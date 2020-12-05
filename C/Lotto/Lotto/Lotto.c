@@ -67,19 +67,6 @@ void random(int arr[5][6], int user_data) {
 			}
 		}
 		mtm(arr, i);
-		
-		/*for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
-		{
-			for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
-			{
-				if (arr[i][mtm_j] > arr[i][mtm_j + 1])
-				{
-					temp = arr[i][mtm_j];
-					arr[i][mtm_j] = arr[i][mtm_j + 1];
-					arr[i][mtm_j + 1] = temp;
-				}
-			}
-		}*/
 	}
 }
 
@@ -110,18 +97,7 @@ void Write(int arr[5][6], int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
-		{
-			for (mtm_j = 0; mtm_j < COLUMN - mtm_i; mtm_j++)
-			{
-				if (arr[i][mtm_j] > arr[i][mtm_j + 1])
-				{
-					temp = arr[i][mtm_j];
-					arr[i][mtm_j] = arr[i][mtm_j + 1];
-					arr[i][mtm_j + 1] = temp;
-				}
-			}
-		}
+		mtm(arr, i);
 	}
 }
 
@@ -196,15 +172,15 @@ void Howmany(int * row) {
 void run() {
 	int ch = 0;
 	int row = 1;
-	//int i_row = 0;
+	int i_row = 0;
 	int page = 1,  i_page = 0;
 	int lotto[5][6]={0};
 	srand(time(NULL));
 	
 	Howmany(&row);
 
-	for (i_page = 0; i_page < page; i_page++) {
-			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page+1);
+	for (i_row = 0; i_row < page; i_row++) {
+			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_row +1);
 			printf("1. 자동  2. 수동 \n");
 			scanf_s("%d", &ch);
 			if (ch == 1)
