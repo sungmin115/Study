@@ -70,7 +70,7 @@ void random(int **lotto, int user_data) {
 	}
 }
 
-void Write(int arr[5][6], int user_data) {
+void Write(int** lotto, int user_data) {
 	int i = 0, j=0;
 	int mtm_i = 0, mtm_j = 0;
 	int num = 0, count = 0, check = 0, temp = 0;
@@ -82,11 +82,11 @@ void Write(int arr[5][6], int user_data) {
 		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
 			scanf_s("%d", &num);   // 숫자 입력 구간
-			arr[i][j] = num;    //작성한 숫자가 배열에 저장 되는 구간
+			lotto[i][j] = num;    //작성한 숫자가 배열에 저장 되는 구간
 			for (count = 0; count < j; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (arr[i][j] == arr[i][count])  //숫자가 같은지 체크
+				if (lotto[i][j] == lotto[i][count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -97,24 +97,15 @@ void Write(int arr[5][6], int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		mtm(arr, i);
+		mtm(lotto, i);
 	}
 }
 
 //한장에 대한 A줄, B줄....에대한 당첨 여부 부탁드려요. 당첨은 1등부터 5등까지요.
-void Check_num(int **arr, int user_data) {
+void Check_num(int **arr, int user_data, int **an) {
 	int row = 1, col = 6;
 	int u_i = 0, u_j = 0, a_i = 0, a_j = 0;
-	int count = 0;
-
-	int** an = malloc(sizeof(int) * row);
-	for (int i = 0; i < row; i++) {
-		an[i] = malloc(sizeof(int) * col);
-	}
-	
-	random(an, row);
-	printf("정답: \n");
-	show(an, col, row);   // 정답 확인용
+	int count = 0;	
 
 	for (u_i=0;u_i<user_data;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
 		u_j = 0;
@@ -187,6 +178,13 @@ void run() {
 		lotto[i] = malloc(sizeof(int)*col);
 	}
 
+	int** an = malloc(sizeof(int) * 1);
+	for (int i = 0; i < 1; i++) {
+		an[i] = malloc(sizeof(int) * col);
+	}
+	random(an, 1);
+	
+
 	for (i_page = 0; i_page < page; i_page++) {
 			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page +1);
 			printf("1. 자동  2. 수동 \n");
@@ -195,14 +193,18 @@ void run() {
 			{
 				random(lotto, row);
 				show(lotto, 6, row);
-				Check_num(lotto, row);
+				Check_num(lotto, row, an);
 			}
 			else if (ch == 2) {
-				Write(&lotto, row);
+				Write(lotto, row);
 				show(lotto, 6, row);
-				Check_num(&lotto, row);
+				Check_num(lotto, row, an);
 			}
 	}
+
+	printf("정답: \n");
+	show(an, col, 1);   // 정답 확인용
+
 	return 0;
 }
 
