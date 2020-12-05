@@ -105,7 +105,12 @@ void Write(int** lotto, int user_data) {
 void Check_num(int **arr, int user_data, int **an) {
 	int row = 1, col = 6;
 	int u_i = 0, u_j = 0, a_i = 0, a_j = 0;
-	int count = 0;	
+	int count = 0, i=0, check_i =0;
+	int** check_count = malloc(sizeof(int) * user_data);
+	for (check_i = 0; check_i < user_data; check_i++) {
+		check_count[check_i] = malloc(sizeof(int) * col);
+	}
+
 
 	for (u_i=0;u_i<user_data;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
 		u_j = 0;
@@ -116,6 +121,7 @@ void Check_num(int **arr, int user_data, int **an) {
 			a_j = 0;
 			while (a_j<6) {  //정답에 대한 줄의 반복
 				if (arr[u_i][u_j] == an[0][a_j]) {  //정답과 유저의 값이 같다면 count의 증가
+					check_count[u_i][count] =an[0][a_j];
 					count++;
 					u_j++;
 					break;
@@ -126,7 +132,12 @@ void Check_num(int **arr, int user_data, int **an) {
 			}
 			u_j++;
 		}
-		printf("%d줄의 당첨 갯수 : %d \n",u_i+1, count);
+		printf("%d줄의 당첨 갯수 : %d ",u_i+1, count);
+		printf("[당첨 숫자 : ");
+		for (i = 0; i < count; i++) {
+			printf("\'%d\'", check_count[u_i][i]);
+		}
+		printf("] \n");
 		switch (count) {
 		case 6:
 			printf("1등에 당첨 되셨습니다. \n \n");
@@ -149,17 +160,44 @@ void Check_num(int **arr, int user_data, int **an) {
 	}
 }
 
+void Howmany_pages(int * page) {
+	int w_page = 0;
+
+	printf("몇장을 살지 입력 하시오.(최소 1장)");
+	scanf_s("%d", &w_page);
+	*page = w_page;
+}
+
 // 몇장은 추후 기능 개선으로 하시고 몇줄을 살지 정하시돼 이차원 배열로 부탁드립니다.
-void Howmany(int * row) {
+void Howmany_row(int * row) {
 	int w_row = 0;
-	//int w_page = 0;
 
 	printf("몇줄을 살지 입력 하시오.");
 	scanf_s("%d", &w_row);
-	/*printf("몇장을 살지 입력 하시오.(최소 1장)");
-	scanf_s("%d", &w_page);
-	*page = w_page;*/
 	*row = w_row;
+}
+
+
+void D_allo(int w_size, int h_size, int m_size) {
+	int*** arr = (int***)malloc(sizeof(int**) * w_size);  //너비 만큼 동적 할당
+	int a, b, c;
+	for (a = 0; a < w_size; a++)  // 메모리 할당은 배열의 주소가 낮은 순서대로 해야 한다.
+	{
+		arr[a] = (int**)malloc(sizeof(int*) * h_size);  //높이 만큼 동적 할당
+		for (b = 0; b < h_size; b++)
+		{
+			arr[a][b] = (int*)malloc(sizeof(int) * m_size);  //두께 만큼 동적 할당
+		}
+	}
+
+	for (w_size; w_size == 0; w_size--)  //현재 배열의 맨 끝부분부터 해제를 한다.
+	{
+		for (h_size; h_size == 0; h_size--)
+			free(arr[w_size][h_size]);  //두께 메머리 할당 해제
+		free(arr[w_size]);  //높이 부분 메모리 할당 해제
+	}
+	free(arr);  //너비 부분 메모리의 할당 해제
+	//메모리 해제는 주소 순서와 상관 없다.
 }
 
 
@@ -168,15 +206,8 @@ void run() {
 	int row = 1, col = 6;
 	int page = 1,  i_page = 0;
 	
-	//int lotto[5][6]={0};
 	srand(time(NULL));
-	
-	Howmany(&row);
-
-	int** lotto = malloc(sizeof(int) * row);
-	for (int i = 0; i < row; i++) {
-		lotto[i] = malloc(sizeof(int)*col);
-	}
+	Howmany_pages(&page);
 
 	int** an = malloc(sizeof(int) * 1);
 	for (int i = 0; i < 1; i++) {
@@ -186,7 +217,15 @@ void run() {
 	
 
 	for (i_page = 0; i_page < page; i_page++) {
-			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page +1);
+			printf("%d장 ", i_page + 1);
+			Howmany_row(&row);
+
+			int** lotto = malloc(sizeof(int) * row);
+			for (int i = 0; i < row; i++) {
+				lotto[i] = malloc(sizeof(int) * col);
+			}
+
+			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page + 1);
 			printf("1. 자동  2. 수동 \n");
 			scanf_s("%d", &ch);
 			if (ch == 1)
@@ -200,10 +239,14 @@ void run() {
 				show(lotto, 6, row);
 				Check_num(lotto, row, an);
 			}
+
+			free(lotto);
 	}
 
+	/*free(lotto);*/
 	printf("정답: \n");
 	show(an, col, 1);   // 정답 확인용
+	free(an);
 
 	return 0;
 }
