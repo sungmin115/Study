@@ -1,13 +1,13 @@
 #include"Lotto.h"
 #define COLUMN 5
 
-int mtm(int (*arr)[6], int a_i) {
+int mtm(int **lotto, int a_i) {
 	int i = 0;
 	int mtm_i = 0,temp = 0;
 	int switch_a[6] = { 0 };
 
 	for (i = 0; i < 6; i++) {
-		switch_a[i] = arr[a_i][i];
+		switch_a[i] = lotto[a_i][i];
 	}
 	for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
 	{
@@ -22,19 +22,19 @@ int mtm(int (*arr)[6], int a_i) {
 		}
 	}
 	for (i = 0; i < 6; i++) {
-		arr[a_i][i] = switch_a[i];
+		lotto[a_i][i] = switch_a[i];
 	}
-	return arr;
+	return lotto;
 }
 
 // 배열 한줄씩 X 한장 씩 5줄.
-void show(int (*arr)[6], int col, int row) {
+void show(int **lotto, int col, int row) {
 	int i = 0;
 	int j = 0;
 	for (j=0;j<row;j++) {
 		for (i = 0; i < col; i++)
 		{
-			printf("%d ", arr[j][i]);
+			printf("%d ", lotto[j][i]);
 		}
 		printf("\n");
 	}
@@ -42,7 +42,7 @@ void show(int (*arr)[6], int col, int row) {
 }
 
 
-void random(int arr[5][6], int user_data) {
+void random(int **lotto, int user_data) {
 	int i = 0, j=0;
 	int mtm_i = 0, mtm_j = 0;
 	int count = 0, check = 0, temp = 0;
@@ -51,11 +51,11 @@ void random(int arr[5][6], int user_data) {
 		j = 0;
 		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
-			arr[i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
+			lotto[i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
 			for (count = 0; count < j; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (arr[i][j] == arr[i][count])  //숫자가 같은지 체크
+				if (lotto[i][j] == lotto[i][count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -66,7 +66,7 @@ void random(int arr[5][6], int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		mtm(arr, i);
+		mtm(lotto, i);
 	}
 }
 
@@ -102,15 +102,19 @@ void Write(int arr[5][6], int user_data) {
 }
 
 //한장에 대한 A줄, B줄....에대한 당첨 여부 부탁드려요. 당첨은 1등부터 5등까지요.
-void Check_num(int(*arr)[6], int user_data) {
-	int an[5][6] = { 0 };
-	//int i_check = 0;
+void Check_num(int **arr, int user_data) {
+	int row = 1, col = 6;
+	int u_i = 0, u_j = 0, a_i = 0, a_j = 0;
 	int count = 0;
-	int u_i = 0, u_j = 0,a_i=0, a_j =0;
 
-	random(&an, 1);
+	int** an = malloc(sizeof(int) * row);
+	for (int i = 0; i < row; i++) {
+		an[i] = malloc(sizeof(int) * col);
+	}
+	
+	random(an, row);
 	printf("정답: \n");
-	show(&an, 6, 1);   // 정답 확인용
+	show(an, col, row);   // 정답 확인용
 
 	for (u_i=0;u_i<user_data;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
 		u_j = 0;
@@ -130,7 +134,6 @@ void Check_num(int(*arr)[6], int user_data) {
 				}
 			}
 			u_j++;
-
 		}
 		printf("%d줄의 당첨 갯수 : %d \n",u_i+1, count);
 		switch (count) {
@@ -171,23 +174,28 @@ void Howmany(int * row) {
 
 void run() {
 	int ch = 0;
-	int row = 1;
-	int i_row = 0;
+	int row = 1, col = 6;
 	int page = 1,  i_page = 0;
-	int lotto[5][6]={0};
+	
+	//int lotto[5][6]={0};
 	srand(time(NULL));
 	
 	Howmany(&row);
 
-	for (i_row = 0; i_row < page; i_row++) {
-			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_row +1);
+	int** lotto = malloc(sizeof(int) * row);
+	for (int i = 0; i < row; i++) {
+		lotto[i] = malloc(sizeof(int)*col);
+	}
+
+	for (i_page = 0; i_page < page; i_page++) {
+			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page +1);
 			printf("1. 자동  2. 수동 \n");
 			scanf_s("%d", &ch);
 			if (ch == 1)
 			{
-				random(&lotto, row);
+				random(lotto, row);
 				show(lotto, 6, row);
-				Check_num(&lotto, row);
+				Check_num(lotto, row);
 			}
 			else if (ch == 2) {
 				Write(&lotto, row);
