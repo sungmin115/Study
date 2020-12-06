@@ -1,13 +1,13 @@
 #include"Lotto.h"
 #define COLUMN 5
 
-int mtm(int **lotto, int a_i) {
+int mtm(int ***lotto, int a_i, int user_page) {
 	int i = 0;
 	int mtm_i = 0,temp = 0;
 	int switch_a[6] = { 0 };
 
 	for (i = 0; i < 6; i++) {
-		switch_a[i] = lotto[a_i][i];
+		switch_a[i] = lotto[user_page][a_i][i];
 	}
 	for (mtm_i = 0; mtm_i < COLUMN; mtm_i++)
 	{
@@ -22,19 +22,19 @@ int mtm(int **lotto, int a_i) {
 		}
 	}
 	for (i = 0; i < 6; i++) {
-		lotto[a_i][i] = switch_a[i];
+		lotto[user_page][a_i][i] = switch_a[i];
 	}
 	return lotto;
 }
 
 // 배열 한줄씩 X 한장 씩 5줄.
-void show(int **lotto, int col, int row) {
+void show(int ***lotto, int col, int row, int user_page) {
 	int i = 0;
 	int j = 0;
 	for (j=0;j<row;j++) {
 		for (i = 0; i < col; i++)
 		{
-			printf("%d ", lotto[j][i]);
+			printf("%d ", lotto[user_page][j][i]);
 		}
 		printf("\n");
 	}
@@ -42,20 +42,20 @@ void show(int **lotto, int col, int row) {
 }
 
 
-void random(int **lotto, int user_data) {
+void random(int ***lotto, int user_row, int user_page) {
 	int i = 0, j=0;
 	int mtm_i = 0, mtm_j = 0;
 	int count = 0, check = 0, temp = 0;
 
-	for (i=0;i<user_data;i++) {
+	for (i=0;i<user_row;i++) {
 		j = 0;
 		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
-			lotto[i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
+			lotto[user_page][i][j] = ((rand() % 45) + 1);   // 랜덤 숫자가 만들어지는 구간
 			for (count = 0; count < j; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (lotto[i][j] == lotto[i][count])  //숫자가 같은지 체크
+				if (lotto[user_page][i][j] == lotto[user_page][i][count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -66,27 +66,27 @@ void random(int **lotto, int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		mtm(lotto, i);
+		mtm(lotto, i, user_page);
 	}
 }
 
-void Write(int** lotto, int user_data) {
+void Write(int*** lotto, int user_row, int user_page) {
 	int i = 0, j=0;
 	int mtm_i = 0, mtm_j = 0;
 	int num = 0, count = 0, check = 0, temp = 0;
 
 	printf("중복되지 않는 숫자 6개를 입력 하시오 만약 중복된 숫자 입력시 다시 입력 하시오.\n");
 
-	for (i=0;i< user_data;i++) {
+	for (i=0;i< user_row;i++) {
 		j = 0;
 		while (j < 6)    //로또 숫자 6개가 반복 되는 구간
 		{
 			scanf_s("%d", &num);   // 숫자 입력 구간
-			lotto[i][j] = num;    //작성한 숫자가 배열에 저장 되는 구간
+			lotto[user_page][i][j] = num;    //작성한 숫자가 배열에 저장 되는 구간
 			for (count = 0; count < j; count++)  // 처음 만들어진 숫자 부터 현재 만들어진 숫자 전까지 반복
 			{
 				check = 0;    // 체크 숫자 초기화
-				if (lotto[i][j] == lotto[i][count])  //숫자가 같은지 체크
+				if (lotto[user_page][i][j] == lotto[user_page][i][count])  //숫자가 같은지 체크
 				{
 					check = 1;  //만약 숫자가 같다면 같은 부분에 다른 숫자를 넣기 위한 장치
 					break;
@@ -97,31 +97,33 @@ void Write(int** lotto, int user_data) {
 				j++;  // 같은 숫자가 아니라면 다음으로 넘어가겠다는 표시
 			}
 		}
-		mtm(lotto, i);
+		mtm(lotto, i, user_page);
 	}
 }
 
-//한장에 대한 A줄, B줄....에대한 당첨 여부 부탁드려요. 당첨은 1등부터 5등까지요.
-void Check_num(int **arr, int user_data, int **an) {
+void Check_num(int ***arr, int user_row, int ***an, int user_page) {
 	int row = 1, col = 6;
 	int u_i = 0, u_j = 0, a_i = 0, a_j = 0;
-	int count = 0, i=0, check_i =0;
-	int** check_count = malloc(sizeof(int) * user_data);
-	for (check_i = 0; check_i < user_data; check_i++) {
-		check_count[check_i] = malloc(sizeof(int) * col);
+	int count = 0, i=0, check_row =0, check_page =0;
+
+	int*** check_count = (int***)malloc(sizeof(int**) * 1);
+	for (check_page=0; check_page<1; check_page++) {
+		check_count[check_page] = (int**)malloc(sizeof(int*) * user_row);
+		for (check_row =0; check_row <user_row; check_row++)
+		{
+			check_count[check_page][check_row] = (int*)malloc(sizeof(int) * col);
+		}
 	}
 
-
-	for (u_i=0;u_i<user_data;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
+	for (u_i=0;u_i< user_row;u_i++) {  //유저가 입력한 줄의 값 만큼 반복
 		u_j = 0;
 		count = 0;
 		while (u_j < 6)    // 유저의 한 줄의 대한 반복
-		{
-			
+		{			
 			a_j = 0;
 			while (a_j<6) {  //정답에 대한 줄의 반복
-				if (arr[u_i][u_j] == an[0][a_j]) {  //정답과 유저의 값이 같다면 count의 증가
-					check_count[u_i][count] =an[0][a_j];
+				if (arr[user_page][u_i][u_j] == an[0][0][a_j]) {  //정답과 유저의 값이 같다면 count의 증가
+					check_count[0][u_i][count] =an[0][0][a_j];
 					count++;
 					u_j++;
 					break;
@@ -135,7 +137,7 @@ void Check_num(int **arr, int user_data, int **an) {
 		printf("%d줄의 당첨 갯수 : %d ",u_i+1, count);
 		printf("[당첨 숫자 : ");
 		for (i = 0; i < count; i++) {
-			printf("\'%d\'", check_count[u_i][i]);
+			printf("\'%d\'", check_count[0][u_i][i]);
 		}
 		printf("] \n");
 		switch (count) {
@@ -168,7 +170,6 @@ void Howmany_pages(int * page) {
 	*page = w_page;
 }
 
-// 몇장은 추후 기능 개선으로 하시고 몇줄을 살지 정하시돼 이차원 배열로 부탁드립니다.
 void Howmany_row(int * row) {
 	int w_row = 0;
 
@@ -177,52 +178,29 @@ void Howmany_row(int * row) {
 	*row = w_row;
 }
 
-
-void D_allo(int w_size, int h_size, int m_size) {
-	int*** arr = (int***)malloc(sizeof(int**) * w_size);  //너비 만큼 동적 할당
-	int a, b, c;
-	for (a = 0; a < w_size; a++)  // 메모리 할당은 배열의 주소가 낮은 순서대로 해야 한다.
-	{
-		arr[a] = (int**)malloc(sizeof(int*) * h_size);  //높이 만큼 동적 할당
-		for (b = 0; b < h_size; b++)
-		{
-			arr[a][b] = (int*)malloc(sizeof(int) * m_size);  //두께 만큼 동적 할당
-		}
-	}
-
-	for (w_size; w_size == 0; w_size--)  //현재 배열의 맨 끝부분부터 해제를 한다.
-	{
-		for (h_size; h_size == 0; h_size--)
-			free(arr[w_size][h_size]);  //두께 메머리 할당 해제
-		free(arr[w_size]);  //높이 부분 메모리 할당 해제
-	}
-	free(arr);  //너비 부분 메모리의 할당 해제
-	//메모리 해제는 주소 순서와 상관 없다.
-}
-
-
 void run() {
 	int ch = 0;
-	int row = 1, col = 6;
-	int page = 1,  i_page = 0;
+	int row = 1,i_row =0, an_row=0, col = 6;
+	int page = 1,  i_page = 0, an_page=0;
 	
 	srand(time(NULL));
-	Howmany_pages(&page);
-
-	int** an = malloc(sizeof(int) * 1);
-	for (int i = 0; i < 1; i++) {
-		an[i] = malloc(sizeof(int) * col);
+	int*** an = (int***)malloc(sizeof(int**) * 1);
+	for (an_page =0;an_page<1;an_page++) {
+		an[an_page] = (int**)malloc(sizeof(int*) * 1);
+		for (an_row = 0; an_row < 1; an_row++) {
+			an[an_page][an_row] = (int*)malloc(sizeof(int) * col);
+		}
 	}
-	random(an, 1);
-	
+	random(an, 1, 0);
 
+	Howmany_pages(&page);
+	int*** lotto = (int***)malloc(sizeof(int**) * page);
 	for (i_page = 0; i_page < page; i_page++) {
 			printf("%d장 ", i_page + 1);
 			Howmany_row(&row);
-
-			int** lotto = malloc(sizeof(int) * row);
-			for (int i = 0; i < row; i++) {
-				lotto[i] = malloc(sizeof(int) * col);
+			lotto[i_page] = (int**)malloc(sizeof(int*) * row);
+			for (i_row = 0;i_row<row;i_row++) {
+				lotto[i_page][i_row] = (int*)malloc(sizeof(int) * col);
 			}
 
 			printf("%d장 자동으로 할지 수동 으로 할 지 정하시오.\n", i_page + 1);
@@ -230,22 +208,34 @@ void run() {
 			scanf_s("%d", &ch);
 			if (ch == 1)
 			{
-				random(lotto, row);
-				show(lotto, 6, row);
-				Check_num(lotto, row, an);
+				random(lotto, row, i_page);
+				show(lotto, 6, row, i_page);
+				Check_num(lotto, row, an, i_page);
 			}
 			else if (ch == 2) {
-				Write(lotto, row);
-				show(lotto, 6, row);
-				Check_num(lotto, row, an);
-			}
+				Write(lotto, row, i_page);
+				show(lotto, 6, row, i_page);
+				Check_num(lotto, row, an, i_page);
+			}			
+	}	
 
-			free(lotto);
+	for (page; page == 0; page--)
+	{
+		for (row; row == 0; row--)
+			free(lotto[page][row]);
+		free(lotto[page]);
 	}
+	free(lotto);
 
-	/*free(lotto);*/
 	printf("정답: \n");
-	show(an, col, 1);   // 정답 확인용
+	show(an, col, 1, 0);   // 정답 확인용
+
+	for (page; page == 0; page--)
+	{
+		for (row; row == 0; row--)
+			free(an[page][row]);
+		free(an[page]);
+	}
 	free(an);
 
 	return 0;
