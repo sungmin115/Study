@@ -46,7 +46,6 @@ void run() {
     for (i_row=0;i_row<row;i_row++) {
         Parking_lot[i_row] = (int*)malloc(sizeof(int*) * col);
     }
-
     
 }
 
