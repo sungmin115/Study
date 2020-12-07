@@ -1,15 +1,18 @@
 #include"Parking_lot.h"
 
 
-typedef struct Parking {
-    CAR* car;
-}Parking;
-
 typedef struct Point
 {
     int x;
     int y;
 }POINT;
+
+typedef struct Stime
+{
+    int h;
+    int m;
+    int s;
+}STIME;
 
 typedef struct Car
 {
@@ -19,21 +22,19 @@ typedef struct Car
     STIME* stime;
 }CAR;
 
-typedef struct Stime
-{
-    int h;
-    int m;
-    int s;
-}STIME;
+typedef struct Parking {
+    CAR* car;
+}Parking;
+
 
 void Howmany_POINT(int* row, int* col) {
     int user_row = 0, user_col = 0;
-    printf("주차장 세로의 길이를 입력 하세요");
-    scanf("%d", &user_row);
+    printf("주차장 세로의 길이를 입력 하세요 : ");
+    scanf_s("%d", &user_row);
     *row = user_row;
     
-    printf("주차장 가로의 길이를 입력 하세요");
-    scanf("%d", &user_col);
+    printf("주차장 가로의 길이를 입력 하세요 : ");
+    scanf_s("%d", &user_col);
     *col = user_col;
 }
 
@@ -50,7 +51,7 @@ void run() {
 }
 
 void display() {
-    printf("주차 관리 프로그램");
+    printf("주차 관리 프로그램 \n");
 }
 
 void main() {
