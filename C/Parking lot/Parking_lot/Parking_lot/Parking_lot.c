@@ -2,7 +2,7 @@
 
 
 typedef struct Parking {
-    CAR** car;
+    CAR* car;
 }Parking;
 
 typedef struct Point
@@ -42,10 +42,11 @@ void run() {
     int i_row = 0, i_col = 0;
 
     Howmany_POINT(&row, &col);
-    int** Parking_lot = (int**)malloc(sizeof(int**)* row);
+    Parking** Parking_lot = (int**)malloc(sizeof(int**)* row);
     for (i_row=0;i_row<row;i_row++) {
         Parking_lot[i_row] = (int*)malloc(sizeof(int*) * col);
     }
+
     
 }
 

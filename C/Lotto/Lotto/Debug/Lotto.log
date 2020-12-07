@@ -2,28 +2,9 @@
   Copyright (c) Microsoft Corporation. All rights reserved.
   cl /c /ZI /JMC /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc142.pdb" /Gd /TC /analyze- /FC /errorReport:prompt Lotto.c
   Lotto.c
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(89,12): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(89,12): warning C4024: 'random': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(131,18): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(143,18): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(143,18): warning C4024: 'random': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(144,15): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(144,15): warning C4024: 'mtm': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(145,16): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(145,16): warning C4024: 'show': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(146,21): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(146,21): warning C4024: 'Check_num': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(149,17): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(149,17): warning C4024: 'Write': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(150,15): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(150,15): warning C4024: 'mtm': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(151,16): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(151,16): warning C4024: 'show': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(153,21): warning C4047: '함수': 'int *'의 간접 참조 수준이 'int (*)[6]'과(와) 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(153,21): warning C4024: 'Check_num': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(157,10): warning C4098: 'run': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(30): warning C4716: 'show': 값을 반환해야 합니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(54): warning C4716: 'random': 값을 반환해야 합니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(21): warning C4716: 'mtm': 값을 반환해야 합니다.
-C:\Users\lionh\source\repos\Lotto\Lotto\Lotto.c(82): warning C4716: 'Write': 값을 반환해야 합니다.
-  Lotto.vcxproj -> C:\Users\lionh\source\repos\Lotto\Debug\Lotto.exe
+D:\Users\lionh\Documents\Study\C\Lotto\Lotto\Lotto.c(4,16): warning C4028: 정식 매개 변수 1이(가) 선언과 다릅니다.
+D:\Users\lionh\Documents\Study\C\Lotto\Lotto\Lotto.c(4,47): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
+D:\Users\lionh\Documents\Study\C\Lotto\Lotto\Lotto.c(27,14): warning C4047: 'return': 'int'의 간접 참조 수준이 'int ***'과(와) 다릅니다.
+D:\Users\lionh\Documents\Study\C\Lotto\Lotto\Lotto.c(186,18): warning C4244: '함수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Users\lionh\Documents\Study\C\Lotto\Lotto\Lotto.c(241,10): warning C4098: 'run': 'void' 함수에서 값을 반환하고 있습니다.
+  Lotto.vcxproj -> D:\Users\lionh\Documents\Study\C\Lotto\Debug\Lotto.exe
