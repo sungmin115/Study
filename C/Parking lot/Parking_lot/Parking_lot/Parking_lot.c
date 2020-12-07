@@ -42,9 +42,9 @@ void run() {
     int i_row = 0, i_col = 0;
 
     Howmany_POINT(&row, &col);
-    Parking** Parking_lot = (int**)malloc(sizeof(int**)* row);
+    CAR** Parking_lot = (CAR**)malloc(sizeof(CAR**)* row);
     for (i_row=0;i_row<row;i_row++) {
-        Parking_lot[i_row] = (int*)malloc(sizeof(int*) * col);
+        Parking_lot[i_row] = (CAR*)malloc(sizeof(CAR*) * col);
     }
     
 }
