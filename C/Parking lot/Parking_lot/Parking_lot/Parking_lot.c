@@ -23,8 +23,8 @@ typedef struct Car
 }CAR;
 
 typedef struct Parking {
-    CAR* car;
-}Parking;
+    CAR** car;    //or CAR[][] car
+}PARKING;
 
 
 void Howmany_POINT(int* row, int* col) {
@@ -43,7 +43,10 @@ void run() {
     int i_row = 0, i_col = 0;
 
     Howmany_POINT(&row, &col);
-    CAR** Parking_lot = (CAR**)malloc(sizeof(CAR**)* row);
+    
+    PARKING** Parking_lot = NULL;
+
+    Parking_lot = (CAR**)malloc(sizeof(CAR**) * row);
     for (i_row=0;i_row<row;i_row++) {
         Parking_lot[i_row] = (CAR*)malloc(sizeof(CAR*) * col);
     }
