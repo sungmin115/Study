@@ -1,3 +1,3 @@
 ﻿  Parking_lot.c
-D:\Users\lionh\Documents\Study\C\Parking lot\Parking_lot\Parking_lot\Parking_lot.c(49,55): warning C4133: '=': 'CAR **'과(와) 'Parking **' 사이의 형식이 호환되지 않습니다.
+D:\Users\lionh\Documents\Study\C\Parking lot\Parking_lot\Parking_lot\Parking_lot.c(98,24): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'CAR *'입니다.
   Parking_lot.vcxproj -> D:\Users\lionh\Documents\Study\C\Parking lot\Parking_lot\Debug\Parking_lot.exe
