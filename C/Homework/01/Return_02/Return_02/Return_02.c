@@ -1,41 +1,56 @@
 #include"header_file.h"
 
-char* back_to_main(int num1) {
-	int result = 0;
-	int arr[20] = {0, };
-	char fail[5] = "fail";
+int* back_to_main(int num1) {
+	int* back_fail = malloc(sizeof(int)*10);
+	int* back_success = malloc(sizeof(int)*10);
+	char fail[5] = "fail", success[8] = "success";
+	int result = num1 * 10;
 	int i = 0;
 
 	if (num1<=10) {
 		for (i = 0; i < 4; i++) {
-			arr[i] = fail[i];
+			back_fail[i] = fail[i];
 		}
-		arr[5] = 0;
-		return arr;
+		back_fail[5] = 0;
+		return back_fail;
 	}
 	else {
-		arr[0] = num1 * 10;
-		arr[1] = "success";
-		return arr;
+		for (i = 0; i < 7;i++) {
+			back_success[i] = success[i];
+		}
+		back_success[8] = result;
+		return back_success;
 	}
 
 }
 
 void main() {
-	int num1 = 0;
-	char * fail;
+	int num1 = 0, i=0;
+	int* fail = {0,};
+	int* success = {0, };
 	printf("정수를 입력 하시오.");
 	scanf_s("%d",&num1);
 
-	fail = back_to_main(num1);
+	if (num1 <= 10) {
+		fail = back_to_main(num1);
+	}
+	else {
+		success = back_to_main(num1);
+	}
 	//char fail[5] = "fail";
 	//int len = strlen(fail);
 
-	if (num1<10) {
-		for (int i = 0; i < 4; i++) {
+	if (num1<=10) {
+		for (i = 0; i < 4; i++) {
 			printf("%c", fail[i]);
 		}
 		printf("%d", fail[5]);
+	}
+	else {
+		for (i = 0; i < 7;i++) {
+			printf("%c", success[i]);
+		}
+		printf("%d", success[8]);
 	}
 	return 0;
 }
