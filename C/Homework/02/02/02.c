@@ -3,6 +3,7 @@
 int main() {
 	int arr[100] = { 0, };
 	int i = 0, j=0, num1 = 0;
+	Display_main();
 	while (i<100) {
 		printf("%d. 정수를 입력 하시오. : ", i+1);
 		scanf_s("%d", &num1);
