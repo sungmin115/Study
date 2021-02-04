@@ -1,21 +1,51 @@
 #include"07.h"
 
 void main() {
-	int result = 0, n = 0;
+	int n = 0, i =0;
 
-	
-	printf("정사각형의 넓이를 구할 한 변의 길이를 입력 하시오. \n");
-	scanf_s("%d", &n);
-	assert(n < 100);
+	while (1) {
+		printf("정사각형의 모양으로 출력하고 싶은 배열의 한변의 길이를 입력 하시오. \n");
+		scanf_s("%d", &n);
+		if (n > 0 && n < 100) {
+			break;
+		}else {
+			printf("100미만의 정수를 입력 하시오.");
+		}
+	}
+	int** square = malloc(sizeof(int) * n);
 
-	printf("정사각형의 넓이 : %d", square(n));
+	for (i = 0; i < n;i++) {
+		square[i] = malloc(sizeof(int) * n);
+	}
+
+	intput_number(square,n);
+	output_number(square,n);
+
+	for (i = 0;i<n;i++) {
+		free(square[i]);
+	}
+
+	free(square);
 
 	return 0;
 }
 
-int square(int n) {
-	int result = 0;
-	result = n * n;
+void intput_number(int **suare, int n) {
+	int i = 0, j = 0, number =0;
+	for (i = 0; i < n;i++) {
+		for (j = 0; j < n;j++) {
+			suare[i][j] = number;
+			number++;
+		}
+	}
+}
 
-	return result;
+void output_number(int** suare, int n) {
+	int i = 0, j = 0, number = 0;
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n; j++) {
+			printf("%-8d ", suare[i][j]);
+		}
+		printf("\n");
+	}
 }

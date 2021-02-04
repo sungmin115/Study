@@ -1,4 +1,4 @@
 #include<stdio.h>
-#include<assert.h>
 
-int square();
+void intput_number(int** suare, int n);
+void output_number(int** suare, int n);
