@@ -1,0 +1,4 @@
+﻿  14.c
+D:\Users\lionh\Documents\Study\C\Homework\14\14\14.c(11,19): warning C4013: 'strcmp'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\Users\lionh\Documents\Study\C\Homework\14\14\14.c(25,10): warning C4098: 'main': 'void' 함수에서 값을 반환하고 있습니다.
+  14.vcxproj -> D:\Users\lionh\Documents\Study\C\Homework\14\Debug\14.exe
