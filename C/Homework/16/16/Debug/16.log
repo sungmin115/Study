@@ -1,0 +1,3 @@
+﻿  16.c
+D:\Users\lionh\Documents\Study\C\Homework\16\16\16.c(18,10): warning C4098: 'main': 'void' 함수에서 값을 반환하고 있습니다.
+  16.vcxproj -> D:\Users\lionh\Documents\Study\C\Homework\16\Debug\16.exe
