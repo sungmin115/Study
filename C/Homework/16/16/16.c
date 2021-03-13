@@ -9,7 +9,7 @@ void main() {
 	}
 
 	for (i=0;i<4;i++) {
-		for (j = 1;j<5;j++) {
+		for (j = i+1;j<5;j++) {
 			if(man[i].name>man[j].name)
 			acending_info(man, i, j);
 		}
