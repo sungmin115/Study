@@ -33,7 +33,8 @@ int input_number(int number) {
 
 char input_char(char charactor) {
 	while(1) {
-		scanf("%c", &charactor, sizeof(charactor));
+		fflush(stdin);
+		scanf(" %c", &charactor, sizeof(charactor));
 		fflush(stdin);
 		if (charactor >0) {
 			break;
