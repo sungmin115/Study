@@ -1,0 +1,9 @@
+﻿  28_210322.c
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(5,10): warning C4098: 'main': 'void' 함수에서 값을 반환하고 있습니다.
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(20,9): warning C4476: 'printf' : 서식 지정자에 알 수 없는 형식 필드 문자 ')'이(가) 있습니다.
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(37,33): warning C4474: 'scanf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(37,33): message : 자리 표시자 및 해당 매개 변수에는 variadic 인수가 1개 필요하지만 2개가 제공되었습니다.
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(60,10): warning C4476: 'printf' : 서식 지정자에 알 수 없는 형식 필드 문자 '%'이(가) 있습니다.
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(60,68): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+D:\Users\lionh\Documents\Study\C\Homework\28_210322\28_210322\28_210322.c(60,68): message : 자리 표시자 및 해당 매개 변수에는 variadic 인수가 2개 필요하지만 3개가 제공되었습니다.
+  28_210322.vcxproj -> D:\Users\lionh\Documents\Study\C\Homework\28_210322\Debug\28_210322.exe
