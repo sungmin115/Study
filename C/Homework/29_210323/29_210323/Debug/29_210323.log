@@ -1,5 +1,6 @@
 ﻿  29_210323.c
 D:\Users\lionh\Documents\Study\C\Homework\29_210323\29_210323\29_210323.c(5,10): warning C4098: 'main': 'void' 함수에서 값을 반환하고 있습니다.
 D:\Users\lionh\Documents\Study\C\Homework\29_210323\29_210323\29_210323.c(14,19): warning C4013: 'malloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-D:\Users\lionh\Documents\Study\C\Homework\29_210323\29_210323\29_210323.c(14,39): warning C4133: '=': 'int *'과(와) 'double *' 사이의 형식이 호환되지 않습니다.
+D:\Users\lionh\Documents\Study\C\Homework\29_210323\29_210323\29_210323.c(14,39): warning C4133: '=': 'int *'과(와) 'float *' 사이의 형식이 호환되지 않습니다.
+D:\Users\lionh\Documents\Study\C\Homework\29_210323\29_210323\29_210323.c(20,6): warning C4013: 'free'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
   29_210323.vcxproj -> D:\Users\lionh\Documents\Study\C\Homework\29_210323\Debug\29_210323.exe

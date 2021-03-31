@@ -4,9 +4,9 @@
 void run();
 void show_main();
 int input_student_number(int st_n);
-double input_score_aver();
-void up_number(double st[], int st_n);
-void show_number(double st[], int st_n);
+float input_score_aver();
+void up_number(float st[], int st_n);
+void show_number(float st[], int st_n);
 
 /*
 21.03.23

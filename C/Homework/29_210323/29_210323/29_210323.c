@@ -7,7 +7,7 @@ void main() {
 
 void run() {
 	int st_n = 0, i = 0;
-	double* st;
+	float* st;
 
 	show_main();
 	st_n = input_student_number(st_n);
@@ -17,6 +17,7 @@ void run() {
 		st[i] = input_score_aver();
 	}
 	up_number(st,st_n);
+	free(st);
 }
 
 void show_main() {
@@ -36,10 +37,10 @@ int input_student_number(int st_n) {
 	return st_n;
 }
 
-double input_score_aver() {
+float input_score_aver() {
 	int i = 0;
 	int student_score[3] = { 0, 0, 0};
-	double sum =0, aver = 0;
+	float sum =0, aver = 0;
 	for (i=0;i<3;i++) {
 		while (1) {
 			printf("%d번째 과목 : ", i+1);
@@ -52,30 +53,38 @@ double input_score_aver() {
 	for (i=0;i<3;i++) {
 		sum = sum + student_score[i];
 	}
-	aver = (double)sum / 3;
+	aver = (float)sum / 3;
 	return aver;
 }
 
-void up_number(double st[], int st_n) {
+void up_number(float st[], int st_n) {
 	int i = 0, j=0;
-	double temp = 0;
-	for (i=0;i<st_n-1;i++) {
-		for (j = i+1;j<st_n;j++) {
+	float temp = 0;
+	while (i<st_n-1) {
+		j = i + 1;
+		while (j<st_n) {
 			if (st[i]<st[j]) {
 				temp = st[i];
 				st[i] = st[j];
 				st[j] = temp;
 			}
+			j++;
 		}
+		i++;
 	}
 	show_number(st, st_n);
 }
 
-void show_number(double st[], int st_n) {
+void show_number(float st[], int st_n) {
 	int i = 0;
+	FILE* fp = fopen("d:\\Users\\student_score.txt", "w");
 	for (i = 0;i<st_n;i++) {
 		printf("%d등 평균 : ", i+1);
 		printf("%.1f \n", st[i]);
 	}
+	for (i = 0;i<st_n;i++) {
+		fprintf(fp, "%.1f \n", st[i]);
+	}
+	fclose(fp);
 }
 
