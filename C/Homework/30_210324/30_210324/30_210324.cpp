@@ -1,17 +1,11 @@
 #include"30_210324.h"
 
-class Solution
-{
-private:
-	int count;
-public:
-	void Initnums(int co);
-	int* fn_running_sum(int* nums);
-	void Show_nums(int* nums);
-};
+int Solution::get_count() {
+	return count;
+}
 
-void Solution::Initnums(int co) {
-	count = co;
+void Solution::set_count(int count) {
+	this->count = count;
 }
 
 int* Solution::fn_running_sum(int* nums) {
@@ -32,20 +26,22 @@ void Solution::Show_nums(int* nums) {
 int main(void) {
 	int i = 0, count =0;
 	int* nums = new int[count];
-	Solution nums_S;
+	Solution* nums_S=new Solution();
 
 	cout << "입력하고 싶은 자리수를 입력 하시오." << endl;
 	cin >> count;
 
-	nums_S.Initnums(count);
+	nums_S->set_count(count);
 
 	cout <<count<< "자리 수를 입력 하시오." << endl;
 	for (i=0;i<count;i++) {
 		cin >> nums[i];
 	}
-	nums_S.fn_running_sum(nums);
-	nums_S.Show_nums(nums);
+	nums=nums_S->fn_running_sum(nums);
+	nums_S->Show_nums(nums);
+	
 
-	delete []nums;
+	delete nums_S;
+	//delete[] nums;
 	return 0;
 }

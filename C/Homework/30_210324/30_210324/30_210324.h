@@ -4,6 +4,21 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+
+class Solution
+{
+private:
+	int count;
+
+public:
+
+	void set_count(int count);
+	int get_count();
+	int* fn_running_sum(int* nums);
+	void Show_nums(int* nums);
+};
+
+
 /*
 Day : 21.03.24
 Quest :
