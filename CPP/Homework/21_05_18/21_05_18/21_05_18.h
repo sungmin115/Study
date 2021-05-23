@@ -20,7 +20,7 @@ public:
 	void checkNumber(int arrUser[]);
 	void showResult();
 };
-
+//입력시 예외 처리와 문제의 5번 추가
 /*
 Day : 21.05.18
 * Quest
