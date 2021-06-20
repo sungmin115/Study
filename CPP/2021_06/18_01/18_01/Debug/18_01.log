@@ -1,0 +1,6 @@
+﻿  18_01.c
+D:\Users\lionh\Documents\Study\CPP\2021_06\18_01\18_01\18_01.c(8,25): warning C4013: 'malloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\Users\lionh\Documents\Study\CPP\2021_06\18_01\18_01\18_01.c(13,7): warning C4013: 'free'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\Users\lionh\Documents\Study\CPP\2021_06\18_01\18_01\18_01.c(6,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Users\lionh\Documents\Study\CPP\2021_06\18_01\18_01\18_01.c(7,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  18_01.vcxproj -> D:\Users\lionh\Documents\Study\CPP\2021_06\18_01\Debug\18_01.exe
