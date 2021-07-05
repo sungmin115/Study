@@ -1,5 +1,7 @@
 #include"21_06_19.h"
+void test() {
 
+}
 void main() {
 	char** twopoin;
 	int i = 0, j = 0, user_count = 0, count = 0, first_count=0, star_count = 1, space_count = 0;
@@ -10,10 +12,12 @@ void main() {
 	first_count = (user_count - 1) / 2;
 	space_count = first_count;
 	twopoin = (char**)malloc(sizeof(char*) * user_count);
+	memset(twopoin,NULL,sizeof(char*)*user_count);
 	for (i = 0; i < user_count; i++) {
 		twopoin[i] = (char*)malloc(sizeof(char) * user_count);
+		memset(twopoin[i],NULL,sizeof(char)*user_count);
 	}
-
+	
 	for (i = 0; i < first_count; i++) {
 		count = 0;
 		for (j = 0; j < space_count; j++) {
