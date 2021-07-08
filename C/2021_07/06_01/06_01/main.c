@@ -10,6 +10,11 @@ void main() {
 		printf("%d번쨰 숫자를 입력 하시오. \n", j);
 		scanf("%d", &num);
 		if (num==-1) {
+			pnum = (int*)malloc(sizeof(int) * i);
+			for (pnum_i = 0; pnum_i < i; pnum_i++) {
+				pnum[pnum_i] = temp[pnum_i];
+			}
+			free(temp);
 			break;
 		}else {
 			pnum = (int*)malloc(sizeof(int)*j);
@@ -34,6 +39,7 @@ void main() {
 		}
 	}
 	for (i=0;i<count;i++) {
-		printf("%d pnum : %d \n",i+1, *(temp+i));
+		printf("%d pnum : %d \n",i+1, *(pnum+i));
 	}
+	free(pnum);
 }
