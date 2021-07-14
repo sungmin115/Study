@@ -16,7 +16,8 @@ void main() {
 			}
 			free(temp);
 			break;
-		}else {
+		}
+		else {
 			pnum = (int*)malloc(sizeof(int)*j);
 			for (pnum_i=0;pnum_i<i;pnum_i++) {
 				pnum[pnum_i] = temp[pnum_i];
@@ -41,5 +42,13 @@ void main() {
 	for (i=0;i<count;i++) {
 		printf("%d pnum : %d \n",i+1, *(pnum+i));
 	}
+	temp = (int*)malloc(sizeof(int)*(j-1));
+	for (i=0;i<count-1;i++) {
+		temp[i] = pnum[i+1];
+	}
+	for (i=0;i<count-1;i++) {
+		printf("%d temp : %d \n",i+1, temp[i]);
+	}
+
 	free(pnum);
 }
