@@ -16,18 +16,23 @@ void run() {
 			cin >> cal_num;
 			cout << "두 수를 입력 하시오" << endl;
 			cin >> first_num >> second_num;
-			cout << "결과 : " << calculator(first_num,cal_num,second_num);
+			cout << "결과 : " << calculator(first_num,cal_num,second_num)<<endl;
 		}else if (menu_num == 2) {
 			select_cal_display();
 			cin >> cal_num;
 			cout << "두 수를 입력 하시오" << endl;
 			cin >> d_first_num >> d_second_num;
-			cout << "결과 : " << calculator(d_first_num, cal_num, d_second_num);
+			cout << "결과 : " << calculator(d_first_num, cal_num, d_second_num)<<endl;
 		}else if (menu_num == 3) {
 			cout << "프로그램 종료" << endl;
 			exit(1);
 		}else {
 			cout << "1~3의 정수를 입력 하시오." << endl;
+			if (!cin) {
+				cout << "숫자를 입력 하시오." << endl;
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+			}
 			continue;
 		}
 	}
